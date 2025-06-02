@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import userRoute from "./src/routes/users.route.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (_, res) => {
   res.sendFile(__dirname + "/src/views/index.html");
 });
+app.use("/api/users", userRoute);
 // route not found
 app.use((_, res) => {
   res.status(404).send("Route not found");
