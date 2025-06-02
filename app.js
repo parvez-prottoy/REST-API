@@ -17,5 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (_, res) => {
   res.sendFile(__dirname + "/src/views/index.html");
 });
+// route not found
+app.use((_, res) => {
+  res.status(404).send("Route not found");
+});
+// server error
+app.use((err, _, res) => {
+  res.status(500).send(err.message);
+});
 
 export default app;
